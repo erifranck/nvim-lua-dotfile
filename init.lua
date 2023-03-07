@@ -1,0 +1,201 @@
+-- Coc configuration for format
+require "coc-setting"
+
+vim.cmd [[packadd packer.nvim]]
+vim.cmd [[packadd packer.nvim]]
+vim.cmd [[set ignorecase]]
+
+-- Theme
+vim.opt.termguicolors = true
+vim.opt.background = "dark"
+vim.cmd [[colorscheme PaperColor]]
+
+-- keymaps leader key
+vim.g.mapleader = ","
+Map = vim.keymap.set
+Cmd = vim.api.nvim_command
+Nmap = function (key, cmd, conf)
+	Map('n', key, cmd, conf)
+end
+
+-- keymaps telescope and theme
+local builtin = require ('telescope.builtin')
+local telescope = require("telescope")
+telescope.setup {
+  pickers = {
+	  find_files = {
+		  theme = "dropdown",
+	  },
+	  git_files = {
+		  theme = "dropdown",
+	  }
+  },
+  extensions = {
+	["ui-select"] = {},
+	fzf = {
+		fuzzy = true,
+		override_generic_sorter = true,
+		override_file_sorter = true,
+		case_mode = "smart_case"
+	},
+	file_browser = {
+		theme = "ivy",
+		-- disables netrw and use telescope-file-browser in its place
+		hijack_netrw = true,
+		mappings = {
+			["i"] = {
+			  -- your custom insert mode mappings
+			},
+			["n"] = {
+			  -- your custom normal mode mappings
+			},
+		},
+	},
+  },
+}
+
+
+telescope.load_extension("fzf")
+telescope.load_extension("file_browser")
+telescope.load_extension("ui-select")
+
+Nmap('<leader>ff', builtin.find_files, {})
+Nmap('<leader>gf', builtin.git_files, {})
+Nmap('<leader>fa', builtin.live_grep, {})
+
+-- Toggle terminal keymaps
+
+local ToggleTerminal = require('toggleterm')
+
+ToggleTerminal.setup {
+  size = 25,
+  open_mapping = [[<c-,>]],
+  hide_numbers = true,
+  shade_filetypes = {},
+  shade_terminals = true,
+  shading_factor = 1,
+  start_in_insert = true,
+  persist_size = true,
+  direction = 'horizontal',
+  close_on_exit = true,
+  shell = vim.o.shell,
+  terminal_mappings = true,
+  insert_mappings = true,
+   winbar = {
+    enabled = false,
+    name_formatter = function(term) --  term: Terminal
+      return term.name
+    end
+  },
+}
+
+
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+end
+
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
+Nmap('<leader>tg', "<cmd>lua _lazygit_toggle()<CR>", {silent = true, noremap = true})
+Nmap('<leader>tt', "<cmd>ToggleTerm<CR>", {silent = true, noremap = true})
+
+-- Autoformat code 
+require("lsp-format").setup {
+    typescript = {
+        tab_width = function()
+            return vim.opt.shiftwidth:get()
+        end,
+    },
+    yaml = { tab_width = 2 },
+}
+
+local prettier = {
+    formatCommand = [[prettier --stdin-filepath ${INPUT} ${--tab-width:tab_width}]],
+    formatStdin = true,
+}
+
+require("lspconfig").efm.setup {
+    on_attach = require("lsp-format").on_attach,
+    init_options = { documentFormatting = true },
+    settings = {
+        languages = {
+            typescript = { prettier },
+            yaml = { prettier },
+        },
+    },
+}
+
+require'lspconfig'.pyright.setup{
+	on_attach=require'completion'.on_attach
+}
+
+-- Navigation keymaps
+Nmap('<Leader>', '<C-w>h', {silent = true, noremap = true})
+
+-- install dependencies
+return require("packer").startup(function (use)
+
+  use 'wbthomason/packer.nvim'
+  use "NLKNguyen/papercolor-theme"
+  use {
+	'nvim-telescope/telescope.nvim', tag = '0.1.1',
+	requires = {{'nvim-lua/plenary.nvim'}}
+  }
+  use {
+	  'nvim-telescope/telescope-ui-select.nvim',
+  }
+  use {
+	  'nvim-telescope/telescope-fzf-native.nvim', run = 'make',
+  }
+  use {
+	    "nvim-telescope/telescope-file-browser.nvim",
+	    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  }
+  use {
+	  "zbirenbaum/copilot.lua",
+	  cmd = "Copilot",
+	  event = "InsertEnter",
+	  config = function()
+		    require("copilot").setup({})
+	  end,
+  }
+  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+    require("toggleterm").setup()
+  end}
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
+  use {
+	  "AckslD/nvim-neoclip.lua",
+	  requires = {
+	    -- you'll need at least one of these
+	    -- {'nvim-telescope/telescope.nvim'},
+	    -- {'ibhagwan/fzf-lua'},
+	},
+	  config = function()
+	    require('neoclip').setup()
+	  end,
+}
+    use "lukas-reineke/lsp-format.nvim"
+	use 'neovim/nvim-lspconfig'
+	use {'neoclide/coc.nvim', branch = 'release'}
+	use 'nvim-lua/completion-nvim'
+
+
+
+
+  vim.cmd [[PackerInstall]]
+end)
