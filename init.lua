@@ -2,6 +2,8 @@
 require "coc-setting"
 require "nvim-cmp"
 require "ide-setting"
+require "glance-settings"
+require "aerial-settings"
 
 vim.cmd [[packadd packer.nvim]]
 vim.cmd [[packadd packer.nvim]]
@@ -256,7 +258,18 @@ return require("packer").startup(function (use)
 	use "numToStr/Comment.nvim"               -- https://github.com/numToStr/Comment.nvim
 	use { "kylechui/nvim-surround", tag = "*" }  -- https://github.com/kylechui/nvim-surround
 	use { 'ldelossa/nvim-ide' }
-
+	use({
+	  "dnlhc/glance.nvim",
+	  config = function()
+	    require('glance').setup({
+	      -- your configuration
+	    })
+	  end,
+	})
+	use {
+	   'stevearc/aerial.nvim',
+	    config = function() require('aerial').setup() end
+	}
 	-- install when start vim if not installed
 	vim.cmd [[PackerInstall]]
 end)
