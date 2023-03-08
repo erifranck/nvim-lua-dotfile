@@ -6,22 +6,25 @@ require "glance-settings"
 require "aerial-settings"
 
 vim.cmd [[packadd packer.nvim]]
-vim.cmd [[packadd packer.nvim]]
-vim.cmd [[set ignorecase]]
-vim.cmd [[set number]]
 
+-- keymaps leader key
+local opt = vim.opt
+vim.g.mapleader = ","
+Map = vim.keymap.set
+
+Nmap = function (key, cmd, conf)
+	Map('n', key, cmd, conf)
+end
+
+-- neovim settings
+opt.number = true
+opt.ignorecase = true
+opt.smartcase = true
 -- Theme
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 vim.cmd [[colorscheme PaperColor]]
 
--- keymaps leader key
-vim.g.mapleader = ","
-Map = vim.keymap.set
-Cmd = vim.api.nvim_command
-Nmap = function (key, cmd, conf)
-	Map('n', key, cmd, conf)
-end
 
 -- keymaps telescope and theme
 local builtin = require ('telescope.builtin')
@@ -145,6 +148,9 @@ require("lspconfig").efm.setup {
 require'lspconfig'.pyright.setup{
 	on_attach=require'completion'.on_attach
 }
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Navigation keymaps
 require("nvim-tree").setup()
