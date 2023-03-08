@@ -1,6 +1,7 @@
 -- Coc configuration for format
 require "coc-setting"
 require "nvim-cmp"
+require "ide-setting"
 
 vim.cmd [[packadd packer.nvim]]
 vim.cmd [[packadd packer.nvim]]
@@ -178,6 +179,9 @@ lualine.setup {
 
 
 require('gitsigns').setup()
+-- ide commands
+vim.keymap.set('n', '<leader>fe', '<cmd>lua require("ide.components.explorer").toggle()<CR>')
+vim.keymap.set('n', '<leader>ww', '<cmd>Workspace<CR>')
 -- install dependencies
 return require("packer").startup(function (use)
 
@@ -251,7 +255,8 @@ return require("packer").startup(function (use)
 	use "williamboman/nvim-lsp-installer"     -- https://github.com/williamboman/nvim-lsp-installer
 	use "numToStr/Comment.nvim"               -- https://github.com/numToStr/Comment.nvim
 	use { "kylechui/nvim-surround", tag = "*" }  -- https://github.com/kylechui/nvim-surround
+	use { 'ldelossa/nvim-ide' }
+
+	-- install when start vim if not installed
 	vim.cmd [[PackerInstall]]
-
-
 end)
