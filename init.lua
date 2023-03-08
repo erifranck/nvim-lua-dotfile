@@ -2,6 +2,7 @@
 require "coc-setting"
 require "nvim-cmp"
 require "ide-setting"
+      
 require "glance-settings"
 require "aerial-settings"
 
@@ -20,6 +21,12 @@ end
 opt.number = true
 opt.ignorecase = true
 opt.smartcase = true
+opt.tabstop = 2 
+opt.shiftwidth = 2 
+opt.softtabstop = 0 
+opt.expandtab = true
+opt.autoindent = true
+
 -- Theme
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
