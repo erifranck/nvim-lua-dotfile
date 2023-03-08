@@ -1,9 +1,11 @@
 -- Coc configuration for format
 require "coc-setting"
+require "nvim-cmp"
 
 vim.cmd [[packadd packer.nvim]]
 vim.cmd [[packadd packer.nvim]]
 vim.cmd [[set ignorecase]]
+vim.cmd [[set number]]
 
 -- Theme
 vim.opt.termguicolors = true
@@ -142,43 +144,62 @@ require'lspconfig'.pyright.setup{
 }
 
 -- Navigation keymaps
-Nmap('<Leader>', '<C-w>h', {silent = true, noremap = true})
+require("nvim-tree").setup()
 
+Nmap('<leader>b', '<cmd>NvimTreeFindFileToggle<CR>', {silent = true, noremap = true})
+Nmap('<F3>', '<cmd>tabprevious<CR>', {silent = true, noremap = true})
+Nmap('<F2>', '<cmd>tabNext<CR>', {silent = true, noremap = true})
+
+-- tab setting
+local lualine = require('lualine')
+lualine.setup {
+  options = {
+    theme = 'gruvbox',
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
+
+
+require('gitsigns').setup()
 -- install dependencies
 return require("packer").startup(function (use)
 
-  use 'wbthomason/packer.nvim'
-  use "NLKNguyen/papercolor-theme"
-  use {
-	'nvim-telescope/telescope.nvim', tag = '0.1.1',
-	requires = {{'nvim-lua/plenary.nvim'}}
-  }
-  use {
-	  'nvim-telescope/telescope-ui-select.nvim',
-  }
-  use {
-	  'nvim-telescope/telescope-fzf-native.nvim', run = 'make',
-  }
-  use {
-	    "nvim-telescope/telescope-file-browser.nvim",
-	    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-  }
-  use {
-	  "zbirenbaum/copilot.lua",
-	  cmd = "Copilot",
-	  event = "InsertEnter",
-	  config = function()
-		    require("copilot").setup({})
-	  end,
-  }
-  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
-    require("toggleterm").setup()
-  end}
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
-  use {
+	use 'wbthomason/packer.nvim'
+	use "NLKNguyen/papercolor-theme"
+	use {
+		'nvim-telescope/telescope.nvim', tag = '0.1.1',
+		requires = {{'nvim-lua/plenary.nvim'}}
+	}
+	use {
+		  "zbirenbaum/copilot.lua",
+		  cmd = "Copilot",
+		  event = "InsertEnter",
+		  config = function()
+			    require("copilot").setup({})
+		  end,
+	}
+	use {
+	    'nvim-treesitter/nvim-treesitter',
+	    run = ':TSUpdate'
+	}
+	use {
 	  "AckslD/nvim-neoclip.lua",
 	  requires = {
 	    -- you'll need at least one of these
@@ -188,14 +209,49 @@ return require("packer").startup(function (use)
 	  config = function()
 	    require('neoclip').setup()
 	  end,
-}
-    use "lukas-reineke/lsp-format.nvim"
+	}
+	use "lukas-reineke/lsp-format.nvim"
 	use 'neovim/nvim-lspconfig'
 	use {'neoclide/coc.nvim', branch = 'release'}
 	use 'nvim-lua/completion-nvim'
+	-- navigation plugins
+	use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+	    require("toggleterm").setup()
+	end}
+	use {
+	  'nvim-tree/nvim-tree.lua',
+	  requires = {
+	    'nvim-tree/nvim-web-devicons', -- optional, for file icons
+	  },
+	  tag = 'nightly' -- optional, updated every week. (see issue #1193)
+	}
+	use { "romgrk/barbar.nvim", wants = "nvim-tree/nvim-web-devicons"}
+	use 'nvim-lualine/lualine.nvim'
+	use {
+		  'nvim-telescope/telescope-ui-select.nvim',
+	}
+	use {
+		  'nvim-telescope/telescope-fzf-native.nvim', run = 'make',
+	}
+	use {
+		  "nvim-telescope/telescope-file-browser.nvim",
+		  requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+	}
+	-- development plugins
+	use {
+		'lewis6991/gitsigns.nvim',
+	}
+	use "fatih/vim-go"                        -- https://github.com/fatih/vim-go
+	use "SirVer/ultisnips"                    -- https://github.com/sirver/UltiSnips
+	use "hrsh7th/cmp-nvim-lsp"                -- https://github.com/hrsh7th/cmp-nvim-lsp
+	use "hrsh7th/nvim-cmp"                    -- https://github.com/hrsh7th/nvim-cmp
+	use "neovim/nvim-lspconfig"               -- https://github.com/neovim/nvim-lspconfig
+	use "onsails/lspkind-nvim"                -- https://github.com/onsails/lspkind-nvim
+	use "quangnguyen30192/cmp-nvim-ultisnips" -- https://github.com/quangnguyen30192/cmp-nvim-ultisnips
+	use "williamboman/nvim-lsp-installer"     -- https://github.com/williamboman/nvim-lsp-installer
+	use "numToStr/Comment.nvim"               -- https://github.com/numToStr/Comment.nvim
+	use { "kylechui/nvim-surround", tag = "*" }  -- https://github.com/kylechui/nvim-surround
+	vim.cmd [[PackerInstall]]
 
 
-
-
-  vim.cmd [[PackerInstall]]
 end)
