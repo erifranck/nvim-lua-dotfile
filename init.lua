@@ -2,7 +2,6 @@
 require "coc-setting"
 require "nvim-cmp"
 require "ide-setting"
-      
 require "glance-settings"
 require "aerial-settings"
 
@@ -36,6 +35,7 @@ vim.cmd [[colorscheme PaperColor]]
 -- keymaps telescope and theme
 local builtin = require ('telescope.builtin')
 local telescope = require("telescope")
+
 telescope.setup {
   pickers = {
 	  find_files = {
@@ -166,6 +166,11 @@ Nmap('<leader>b', '<cmd>NvimTreeFindFileToggle<CR>', {silent = true, noremap = t
 Nmap('<F3>', '<cmd>tabprevious<CR>', {silent = true, noremap = true})
 Nmap('<F2>', '<cmd>tabNext<CR>', {silent = true, noremap = true})
 
+require('navigator').setup()
+require("nvim-surround").setup({
+  -- Configuration here, or leave empty to use defaults
+})
+
 -- tab setting
 local lualine = require('lualine')
 lualine.setup {
@@ -230,7 +235,6 @@ return require("packer").startup(function (use)
 	  end,
 	}
 	use "lukas-reineke/lsp-format.nvim"
-	use 'neovim/nvim-lspconfig'
 	use {'neoclide/coc.nvim', branch = 'release'}
 	use 'nvim-lua/completion-nvim'
 	-- navigation plugins
@@ -283,6 +287,17 @@ return require("packer").startup(function (use)
 	   'stevearc/aerial.nvim',
 	    config = function() require('aerial').setup() end
 	}
+  use {
+	"windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
+  use({
+    'ray-x/navigator.lua',
+    requires = {
+        { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+        { 'neovim/nvim-lspconfig' },
+    },
+  })
 	-- install when start vim if not installed
 	vim.cmd [[PackerInstall]]
 end)
