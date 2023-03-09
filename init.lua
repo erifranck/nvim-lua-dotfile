@@ -202,6 +202,9 @@ require('gitsigns').setup()
 -- ide commands
 vim.keymap.set('n', '<leader>fe', '<cmd>lua require("ide.components.explorer").toggle()<CR>')
 vim.keymap.set('n', '<leader>ww', '<cmd>Workspace<CR>')
+
+require('alpha').setup(require('alpha.themes.startify').config)
+
 -- install dependencies
 return require("packer").startup(function (use)
 
@@ -291,13 +294,17 @@ return require("packer").startup(function (use)
 	"windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
   }
-  use({
+  use {
     'ray-x/navigator.lua',
     requires = {
-        { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
-        { 'neovim/nvim-lspconfig' },
+      { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+      { 'neovim/nvim-lspconfig' },
     },
-  })
+  }
+
+  use {
+    'goolord/alpha-nvim',
+  }
 	-- install when start vim if not installed
 	vim.cmd [[PackerInstall]]
 end)
