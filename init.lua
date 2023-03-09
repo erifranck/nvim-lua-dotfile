@@ -304,6 +304,9 @@ return require("packer").startup(function (use)
 
   use {
     'goolord/alpha-nvim',
+    dependencies = {
+      'kyazdani42/nvim-web-devicons',
+    },
   }
 	-- install when start vim if not installed
 	vim.cmd [[PackerInstall]]
