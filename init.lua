@@ -1,5 +1,4 @@
 require 'plugins'
-require 'blankline-config'
 
 -- Coc configuration for format
 require "coc-setting"
@@ -8,6 +7,10 @@ require "nvim-cmp"
 require "ide-setting"
 require "glance-settings"
 require "aerial-settings"
+--
+require 'blankline-config'
+require 'starline-config'
+require 'lualine-config'
 
 -- keymaps leader key
 local opt = vim.opt
@@ -15,7 +18,7 @@ vim.g.mapleader = ","
 Map = vim.keymap.set
 
 Nmap = function(key, cmd, conf)
-	Map('n', key, cmd, conf)
+  Map('n', key, cmd, conf)
 end
 
 -- neovim settings
@@ -39,36 +42,36 @@ local builtin = require('telescope.builtin')
 local telescope = require("telescope")
 
 telescope.setup {
-	pickers = {
-		find_files = {
-			theme = "dropdown",
-		},
-		git_files = {
-			theme = "dropdown",
-		}
-	},
-	extensions = {
-		    ["ui-select"] = {},
-		fzf = {
-			fuzzy = true,
-			override_generic_sorter = true,
-			override_file_sorter = true,
-			case_mode = "smart_case"
-		},
-		file_browser = {
-			theme = "ivy",
-			-- disables netrw and use telescope-file-browser in its place
-			hijack_netrw = true,
-			mappings = {
-				    ["i"] = {
-					-- your custom insert mode mappings
-				},
-				    ["n"] = {
-					-- your custom normal mode mappings
-				},
-			},
-		},
-	},
+  pickers = {
+    find_files = {
+      theme = "dropdown",
+    },
+    git_files = {
+      theme = "dropdown",
+    }
+  },
+  extensions = {
+        ["ui-select"] = {},
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case"
+    },
+    file_browser = {
+      theme = "ivy",
+      -- disables netrw and use telescope-file-browser in its place
+      hijack_netrw = true,
+      mappings = {
+            ["i"] = {
+          -- your custom insert mode mappings
+        },
+            ["n"] = {
+          -- your custom normal mode mappings
+        },
+      },
+    },
+  },
 }
 
 
@@ -85,44 +88,44 @@ Nmap('<leader>fa', builtin.live_grep, {})
 local ToggleTerminal = require('toggleterm')
 
 ToggleTerminal.setup {
-	size = 25,
-	open_mapping = [[<c-,>]],
-	hide_numbers = true,
-	shade_filetypes = {},
-	shade_terminals = true,
-	shading_factor = 1,
-	start_in_insert = true,
-	persist_size = true,
-	direction = 'horizontal',
-	close_on_exit = true,
-	shell = vim.o.shell,
-	terminal_mappings = true,
-	insert_mappings = true,
-	winbar = {
-		enabled = false,
-		name_formatter = function(term) --  term: Terminal
-			return term.name
-		end
-	},
+  size = 25,
+  open_mapping = [[<c-,>]],
+  hide_numbers = true,
+  shade_filetypes = {},
+  shade_terminals = true,
+  shading_factor = 1,
+  start_in_insert = true,
+  persist_size = true,
+  direction = 'horizontal',
+  close_on_exit = true,
+  shell = vim.o.shell,
+  terminal_mappings = true,
+  insert_mappings = true,
+  winbar = {
+    enabled = false,
+    name_formatter = function(term) --  term: Terminal
+      return term.name
+    end
+  },
 }
 
 
-function _G.set_terminal_keymaps()
-	local opts = { buffer = 0 }
-	vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-	vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-	vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-	vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-	vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-	vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-	vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
-end
+-- function _G.set_terminal_keymaps()
+--local opts = { buffer = 0 }
+-- vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+-- vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+-- vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+-- vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+-- vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+-- vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+--  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+-- end
 
 local Terminal = require('toggleterm.terminal').Terminal
 local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
 
 function _lazygit_toggle()
-	lazygit:toggle()
+  lazygit:toggle()
 end
 
 Nmap('<leader>tg', "<cmd>lua _lazygit_toggle()<CR>", { silent = true, noremap = true })
@@ -130,32 +133,32 @@ Nmap('<leader>tt', "<cmd>ToggleTerm<CR>", { silent = true, noremap = true })
 
 -- Autoformat code
 require("lsp-format").setup {
-	typescript = {
-		tab_width = function()
-			return vim.opt.shiftwidth:get()
-		end,
-	},
-	yaml = { tab_width = 2 },
+  typescript = {
+    tab_width = function()
+      return vim.opt.shiftwidth:get()
+    end,
+  },
+  yaml = { tab_width = 2 },
 }
 
 local prettier = {
-	formatCommand = [[prettier --stdin-filepath ${INPUT} ${--tab-width:tab_width}]],
-	formatStdin = true,
+  formatCommand = [[prettier --stdin-filepath ${INPUT} ${--tab-width:tab_width}]],
+  formatStdin = true,
 }
 
 require("lspconfig").efm.setup {
-	on_attach = require("lsp-format").on_attach,
-	init_options = { documentFormatting = true },
-	settings = {
-		languages = {
-			typescript = { prettier },
-			yaml = { prettier },
-		},
-	},
+  on_attach = require("lsp-format").on_attach,
+  init_options = { documentFormatting = true },
+  settings = {
+    languages = {
+      typescript = { prettier },
+      yaml = { prettier },
+    },
+  },
 }
 
 require 'lspconfig'.pyright.setup {
-	on_attach = require 'completion'.on_attach
+  on_attach = require 'completion'.on_attach
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -170,33 +173,7 @@ Nmap('<F2>', '<cmd>tabNext<CR>', { silent = true, noremap = true })
 
 require('navigator').setup()
 require("nvim-surround").setup({
-	-- Configuration here, or leave empty to use defaults
-})
-
--- tab setting
-local lualine = require('lualine')
-lualine.setup({
-	options = {
-		theme = 'gruvbox',
-	},
-	sections = {
-		lualine_a = { 'mode' },
-		lualine_b = { 'branch' },
-		lualine_c = { 'filename' },
-		lualine_x = { 'encoding', 'fileformat', 'filetype' },
-		lualine_y = { 'progress' },
-		lualine_z = { 'location' }
-	},
-	inactive_sections = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_c = { 'filename' },
-		lualine_x = { 'location' },
-		lualine_y = {},
-		lualine_z = {}
-	},
-	tabline = {},
-	extensions = {}
+  -- Configuration here, or leave empty to use defaults
 })
 
 

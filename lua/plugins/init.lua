@@ -47,8 +47,11 @@ return require("packer").startup(function(use)
   }
   use { "romgrk/barbar.nvim", wants = "nvim-tree/nvim-web-devicons" }
   use { "lukas-reineke/indent-blankline.nvim", event = "BufRead" }
+  use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
+
 
   use 'nvim-lualine/lualine.nvim'
+  use { 'tamton-aquib/staline.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
 
   use {
     'nvim-telescope/telescope-ui-select.nvim',

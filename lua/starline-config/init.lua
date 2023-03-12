@@ -1,0 +1,1 @@
+require('starline-config.simple')
