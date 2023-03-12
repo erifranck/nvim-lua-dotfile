@@ -45,6 +45,17 @@ return require("packer").startup(function(use)
     },
     tag = 'nightly'                  -- optional, updated every week. (see issue #1193)
   }
+  use {
+    "folke/twilight.nvim",
+    config = function()
+      require("twilight").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+  use { "catppuccin/nvim", as = "catppuccin" }
   use { "romgrk/barbar.nvim", wants = "nvim-tree/nvim-web-devicons" }
   use { "lukas-reineke/indent-blankline.nvim", event = "BufRead" }
   use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
