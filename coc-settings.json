@@ -1,4 +1,16 @@
 {
   "svelte.enable-ts-plugin": true,
-  "coc.preferences.formatOnSaveFiletypes": ["svelte", "lua", "js", "ts", "json", "html", "css", "scss", "markdown", "yaml", "tsx"]
+  "coc.preferences.formatOnSaveFiletypes": [
+    "svelte",
+    "lua",
+    "js",
+    "ts",
+    "json",
+    "html",
+    "css",
+    "scss",
+    "markdown",
+    "yaml",
+    "tsx"
+  ]
 }
