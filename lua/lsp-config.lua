@@ -44,13 +44,15 @@ require("lspconfig").efm.setup {
   settings = {
     languages = {
       typescript = { prettier },
+      javascript = { prettier },
       yaml = { prettier },
     },
   },
 }
 
 require 'lspconfig'.pyright.setup {
-  on_attach = require 'completion'.on_attach,
+  -- on_attach = require 'completion'.on_attach, -- use completion-nvim
+  on_attach = on_attach,
   capabilities = capabilities,
 }
 
