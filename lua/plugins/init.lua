@@ -119,6 +119,8 @@ return require("packer").startup(function(use)
       'kyazdani42/nvim-web-devicons',
     },
   }
+  -- game development
+  use 'lommix/godot.nvim'
   -- install when start vim if not installed
   vim.cmd [[PackerInstall]]
 end)

@@ -4,7 +4,7 @@ require 'plugins'
 require "coc-setting"
 
 require "nvim-cmp"
-require "ide-setting"
+-- require "ide-setting"
 require "glance-settings"
 require "aerial-settings"
 --
@@ -12,6 +12,7 @@ require 'blankline-config'
 require 'starline-config'
 require 'lualine-config'
 require 'lsp-config'
+require 'godot-settings'
 
 -- keymaps leader key
 local opt = vim.opt
@@ -31,6 +32,7 @@ opt.shiftwidth = 2
 opt.softtabstop = 0
 opt.expandtab = true
 opt.autoindent = true
+vim.encoding = "utf-8"
 
 -- Theme
 vim.opt.termguicolors = true
@@ -160,9 +162,8 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 require("nvim-tree").setup()
 
 Nmap('<leader>b', '<cmd>NvimTreeFindFileToggle<CR>', { silent = true, noremap = true })
-Nmap('<F4>', '<cmd>BufferNext<CR>', { silent = true, noremap = true })
-Nmap('<F3>', '<cmd>BufferPrevious<CR>', { silent = true, noremap = true })
-Nmap('<F2>', '<cmd>tabNext<CR>', { silent = true, noremap = true })
+Nmap('<F3>', '<cmd>BufferNext<CR>', { silent = true, noremap = true })
+Nmap('<F2>', '<cmd>BufferPrevious<CR>', { silent = true, noremap = true })
 
 require('navigator').setup()
 require("nvim-surround").setup({
