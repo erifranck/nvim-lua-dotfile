@@ -11,6 +11,7 @@ require "aerial-settings"
 require 'blankline-config'
 require 'starline-config'
 require 'lualine-config'
+require 'lsp-config'
 
 -- keymaps leader key
 local opt = vim.opt
@@ -151,35 +152,6 @@ require("twilight").setup {
 Nmap('<leader>tg', "<cmd>lua _lazygit_toggle()<CR>", { silent = true, noremap = true })
 Nmap('<leader>tt', "<cmd>ToggleTerm<CR>", { silent = true, noremap = true })
 
--- Autoformat code
-require("lsp-format").setup {
-  typescript = {
-    tab_width = function()
-      return vim.opt.shiftwidth:get()
-    end,
-  },
-  yaml = { tab_width = 2 },
-}
-
-local prettier = {
-  formatCommand = [[prettier --stdin-filepath ${INPUT} ${--tab-width:tab_width}]],
-  formatStdin = true,
-}
-
-require("lspconfig").efm.setup {
-  on_attach = require("lsp-format").on_attach,
-  init_options = { documentFormatting = true },
-  settings = {
-    languages = {
-      typescript = { prettier },
-      yaml = { prettier },
-    },
-  },
-}
-
-require 'lspconfig'.pyright.setup {
-  on_attach = require 'completion'.on_attach
-}
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -188,7 +160,8 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 require("nvim-tree").setup()
 
 Nmap('<leader>b', '<cmd>NvimTreeFindFileToggle<CR>', { silent = true, noremap = true })
-Nmap('<F3>', '<cmd>tabprevious<CR>', { silent = true, noremap = true })
+Nmap('<F4>', '<cmd>BufferNext<CR>', { silent = true, noremap = true })
+Nmap('<F3>', '<cmd>BufferPrevious<CR>', { silent = true, noremap = true })
 Nmap('<F2>', '<cmd>tabNext<CR>', { silent = true, noremap = true })
 
 require('navigator').setup()
