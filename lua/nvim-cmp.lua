@@ -21,10 +21,13 @@ cmp.setup({
     documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ["<C-n>"] = cmp.mapping({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),       -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<C-CR>'] = cmp.mapping.confirm({ select = true }),     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ["<C-n>"] = cmp.mapping({
       c = function()
         if cmp.visible() then
           cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
@@ -40,7 +43,7 @@ cmp.setup({
         end
       end,
     }),
-        ["<C-p>"] = cmp.mapping({
+    ["<C-p>"] = cmp.mapping({
       c = function()
         if cmp.visible() then
           cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
@@ -56,12 +59,12 @@ cmp.setup({
         end
       end,
     }),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+    { name = 'coc' },
     { name = 'ultisnips' },
+    { name = 'treesitter' },
   }, {
     { name = 'buffer' },
   })

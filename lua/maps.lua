@@ -16,6 +16,7 @@ opt.shiftwidth = 2
 opt.softtabstop = 0
 opt.expandtab = true
 opt.autoindent = true
+vim.o.completeopt = "menuone,noselect"
 vim.encoding = "utf-8"
 
 -- Theme
@@ -38,7 +39,7 @@ telescope.setup {
     }
   },
   extensions = {
-        ["ui-select"] = {},
+    ["ui-select"] = {},
     fzf = {
       fuzzy = true,
       override_generic_sorter = true,
@@ -50,10 +51,10 @@ telescope.setup {
       -- disables netrw and use telescope-file-browser in its place
       hijack_netrw = true,
       mappings = {
-            ["i"] = {
+        ["i"] = {
           -- your custom insert mode mappings
         },
-            ["n"] = {
+        ["n"] = {
           -- your custom normal mode mappings
         },
       },
@@ -97,16 +98,16 @@ ToggleTerminal.setup {
 }
 
 
--- function _G.set_terminal_keymaps()
---local opts = { buffer = 0 }
--- vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
--- vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
--- vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
--- vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
--- vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
--- vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
---  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
--- end
+function _G.set_terminal_keymaps()
+  local opts = { buffer = 0 }
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+end
 
 local Terminal = require('toggleterm.terminal').Terminal
 local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })

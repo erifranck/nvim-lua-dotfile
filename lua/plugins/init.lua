@@ -33,7 +33,7 @@ return require("packer").startup(function(use)
   }
   use "lukas-reineke/lsp-format.nvim"
   use { 'neoclide/coc.nvim', branch = 'release' }
-  use 'nvim-lua/completion-nvim'
+
   -- navigation plugins
   use { "akinsho/toggleterm.nvim", tag = '*', config = function()
     require("toggleterm").setup()
@@ -78,13 +78,16 @@ return require("packer").startup(function(use)
   use {
     'lewis6991/gitsigns.nvim',
   }
-  use "fatih/vim-go"                          -- https://github.com/fatih/vim-go
-  use "SirVer/ultisnips"                      -- https://github.com/sirver/UltiSnips
-  use "hrsh7th/cmp-nvim-lsp"                  -- https://github.com/hrsh7th/cmp-nvim-lsp
+  use "fatih/vim-go"         -- https://github.com/fatih/vim-go
+  use "SirVer/ultisnips"     -- https://github.com/sirver/UltiSnips
+  use "hrsh7th/cmp-nvim-lsp" -- https://github.com/hrsh7th/cmp-nvim-lsp
+  -- use 'nvim-lua/completion-nvim'             -- completion plugin not use at same time with cmp
+  -- use 'nvim-treesitter/completion-treesitter' -- completion plugin not use at same time with cmp
   use "hrsh7th/nvim-cmp"                      -- https://github.com/hrsh7th/nvim-cmp
+  use "quangnguyen30192/cmp-nvim-ultisnips"   -- https://github.com/quangnguyen30192/cmp-nvim-ultisnips
+  use "ray-x/cmp-treesitter"
   use "neovim/nvim-lspconfig"                 -- https://github.com/neovim/nvim-lspconfig
   use "onsails/lspkind-nvim"                  -- https://github.com/onsails/lspkind-nvim
-  use "quangnguyen30192/cmp-nvim-ultisnips"   -- https://github.com/quangnguyen30192/cmp-nvim-ultisnips
   use "williamboman/nvim-lsp-installer"       -- https://github.com/williamboman/nvim-lsp-installer
   use "numToStr/Comment.nvim"                 -- https://github.com/numToStr/Comment.nvim
   use { "kylechui/nvim-surround", tag = "*" } -- https://github.com/kylechui/nvim-surround
