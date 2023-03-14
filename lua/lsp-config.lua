@@ -23,90 +23,34 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<leader>lf", ":lua vim.lsp.buf.formatting()<CR>", opts) --> formats the current buffer
 end
 
--- Autoformat code
-require("lsp-format").setup {
-  typescript = {
-    tab_width = function()
-      return vim.opt.shiftwidth:get()
-    end,
+local lspconfig = require("lspconfig")
+local lsp_defaults = lspconfig.util.default_config
+local cmp_capabiliries = require('cmp_nvim_lsp').default_capabilities()
+lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, cmp_capabiliries)
+
+lspconfig.lua_ls.setup({
+  single_file_support = true,
+  flags = {
+    debounce_text_changes = 150,
   },
-  yaml = { tab_width = 2 },
-}
+})
 
-local prettier = {
-  formatCommand = [[prettier --stdin-filepath ${INPUT} ${--tab-width:tab_width}]],
-  formatStdin = true,
-}
-
-require("lspconfig").efm.setup {
-  on_attach = require("lsp-format").on_attach,
-  init_options = { documentFormatting = true },
-  settings = {
-    languages = {
-      typescript = { prettier },
-      javascript = { prettier },
-      yaml = { prettier },
+lspconfig.lua_ls.setup({
+  single_file_support = true,
+  flags = {
+    debounce_text_changes = 150,
+  },
+})
+lspconfig.svelte.setup({})
+lspconfig.emmet_ls.setup({
+  capabilities = cmp_capabiliries,
+  filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'svelte' },
+  init_options = {
+    html = {
+      options = {
+        -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+            ["bem.enabled"] = true,
+      },
     },
-  },
-}
-
-require 'lspconfig'.pyright.setup {
-  -- on_attach = require 'completion'.on_attach, -- use completion-nvim
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-require("lspconfig")["cssls"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-require("lspconfig")["emmet_ls"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-require("lspconfig")["tsserver"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-require("lspconfig")["lua_ls"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-require("lspconfig")["svelte"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-require("lspconfig")["texlab"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-require("lspconfig")["ltex"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-require("lspconfig")["bashls"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-require("lspconfig")["hls"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-require("lspconfig")["clangd"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-require("lspconfig")["gopls"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
+  }
 })

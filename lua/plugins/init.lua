@@ -78,14 +78,16 @@ return require("packer").startup(function(use)
   use {
     'lewis6991/gitsigns.nvim',
   }
-  use "fatih/vim-go"         -- https://github.com/fatih/vim-go
-  use "SirVer/ultisnips"     -- https://github.com/sirver/UltiSnips
-  use "hrsh7th/cmp-nvim-lsp" -- https://github.com/hrsh7th/cmp-nvim-lsp
-  -- use 'nvim-lua/completion-nvim'             -- completion plugin not use at same time with cmp
-  -- use 'nvim-treesitter/completion-treesitter' -- completion plugin not use at same time with cmp
+  use "fatih/vim-go"                          -- https://github.com/fatih/vim-go
+  use "SirVer/ultisnips"                      -- https://github.com/sirver/UltiSnips
+  use "hrsh7th/cmp-nvim-lsp"                  -- https://github.com/hrsh7th/cmp-nvim-lsp
+  use 'nvim-lua/completion-nvim'              -- completion plugin not use at same time with cmp
+  use 'nvim-treesitter/completion-treesitter' -- completion plugin not use at same time with cmp
   use "hrsh7th/nvim-cmp"                      -- https://github.com/hrsh7th/nvim-cmp
   use "quangnguyen30192/cmp-nvim-ultisnips"   -- https://github.com/quangnguyen30192/cmp-nvim-ultisnips
   use "ray-x/cmp-treesitter"
+  use "hrsh7th/cmp-buffer"
+  use "dcampos/cmp-emmet-vim"
   use "neovim/nvim-lspconfig"                 -- https://github.com/neovim/nvim-lspconfig
   use "onsails/lspkind-nvim"                  -- https://github.com/onsails/lspkind-nvim
   use "williamboman/nvim-lsp-installer"       -- https://github.com/williamboman/nvim-lsp-installer
