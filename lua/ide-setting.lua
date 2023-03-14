@@ -62,3 +62,7 @@ require('ide').setup({
     bottom = 20
   }
 })
+
+-- ide commands
+vim.keymap.set('n', '<leader>fe', '<cmd>lua require("ide.components.explorer").toggle()<CR>')
+vim.keymap.set('n', '<leader>ww', '<cmd>Workspace<CR>')

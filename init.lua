@@ -172,8 +172,5 @@ require("nvim-surround").setup({
 
 
 require('gitsigns').setup()
--- ide commands
-vim.keymap.set('n', '<leader>fe', '<cmd>lua require("ide.components.explorer").toggle()<CR>')
-vim.keymap.set('n', '<leader>ww', '<cmd>Workspace<CR>')
 
 require('alpha').setup(require('alpha.themes.startify').config)

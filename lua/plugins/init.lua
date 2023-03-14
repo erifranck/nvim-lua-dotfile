@@ -88,7 +88,7 @@ return require("packer").startup(function(use)
   use "williamboman/nvim-lsp-installer"       -- https://github.com/williamboman/nvim-lsp-installer
   use "numToStr/Comment.nvim"                 -- https://github.com/numToStr/Comment.nvim
   use { "kylechui/nvim-surround", tag = "*" } -- https://github.com/kylechui/nvim-surround
-  use { 'ldelossa/nvim-ide' }
+  -- use { 'ldelossa/nvim-ide' }
   use({
     "dnlhc/glance.nvim",
     config = function()
