@@ -20,7 +20,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "[d", ":lua vim.diagnostic.goto_prev()<CR>", opts)
   buf_set_keymap("n", "]d", ":lua vim.diagnostic.goto_next()<CR>", opts)
   buf_set_keymap("n", "<leader>lq", ":lua vim.diagnostic.setloclist()<CR>", opts)
-  buf_set_keymap("n", "<leader>lf", ":lua vim.lsp.buf.formatting()<CR>", opts) --> formats the current buffer
+  buf_set_keymap("n", "<A-f>", ":lua vim.lsp.buf.formatting()<CR>", opts) --> formats the current buffer
 end
 
 local lspconfig = require("lspconfig")
@@ -49,7 +49,7 @@ lspconfig.emmet_ls.setup({
     html = {
       options = {
         -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-            ["bem.enabled"] = true,
+        ["bem.enabled"] = true,
       },
     },
   }

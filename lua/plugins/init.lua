@@ -80,7 +80,6 @@ return require("packer").startup(function(use)
   }
   use "fatih/vim-go"                          -- https://github.com/fatih/vim-go
   use "SirVer/ultisnips"                      -- https://github.com/sirver/UltiSnips
-  use "hrsh7th/cmp-nvim-lsp"                  -- https://github.com/hrsh7th/cmp-nvim-lsp
   use 'nvim-lua/completion-nvim'              -- completion plugin not use at same time with cmp
   use 'nvim-treesitter/completion-treesitter' -- completion plugin not use at same time with cmp
   use "hrsh7th/nvim-cmp"                      -- https://github.com/hrsh7th/nvim-cmp
@@ -88,9 +87,12 @@ return require("packer").startup(function(use)
   use "ray-x/cmp-treesitter"
   use "hrsh7th/cmp-buffer"
   use "dcampos/cmp-emmet-vim"
-  use "neovim/nvim-lspconfig"                 -- https://github.com/neovim/nvim-lspconfig
-  use "onsails/lspkind-nvim"                  -- https://github.com/onsails/lspkind-nvim
-  use "williamboman/nvim-lsp-installer"       -- https://github.com/williamboman/nvim-lsp-installer
+  use "hrsh7th/cmp-nvim-lsp"            -- https://github.com/hrsh7th/cmp-nvim-lsp
+  use "neovim/nvim-lspconfig"           -- https://github.com/neovim/nvim-lspconfig
+  use "onsails/lspkind-nvim"            -- https://github.com/onsails/lspkind-nvim
+  use "williamboman/nvim-lsp-installer" -- https://github.com/williamboman/nvim-lsp-installer
+  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'MunifTanjim/prettier.nvim'
   use "numToStr/Comment.nvim"                 -- https://github.com/numToStr/Comment.nvim
   use { "kylechui/nvim-surround", tag = "*" } -- https://github.com/kylechui/nvim-surround
   -- use { 'ldelossa/nvim-ide' }
