@@ -20,7 +20,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "[d", ":lua vim.diagnostic.goto_prev()<CR>", opts)
   buf_set_keymap("n", "]d", ":lua vim.diagnostic.goto_next()<CR>", opts)
   buf_set_keymap("n", "<leader>lq", ":lua vim.diagnostic.setloclist()<CR>", opts)
-  buf_set_keymap("n", "<A-f>", ":lua vim.lsp.buf.formatting()<CR>", opts) --> formats the current buffer
+  buf_set_keymap("n", "<leader>fd", ":lua vim.lsp.buf.formatting()<CR>", opts) --> formats the current buffer
 end
 
 local lspconfig = require("lspconfig")
@@ -30,6 +30,7 @@ lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabiliti
 
 lspconfig.lua_ls.setup({
   single_file_support = true,
+  on_attach = on_attach,
   flags = {
     debounce_text_changes = 150,
   },
@@ -41,10 +42,13 @@ lspconfig.lua_ls.setup({
     debounce_text_changes = 150,
   },
 })
-lspconfig.svelte.setup({})
+lspconfig.svelte.setup({
+  on_attach = on_attach,
+})
 lspconfig.emmet_ls.setup({
   capabilities = cmp_capabiliries,
   filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'svelte' },
+  on_attach = on_attach,
   init_options = {
     html = {
       options = {

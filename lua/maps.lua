@@ -151,6 +151,7 @@ Nmap('<F3>', '<cmd>BufferNext<CR>', { silent = true, noremap = true })
 Nmap('<F2>', '<cmd>BufferPrevious<CR>', { silent = true, noremap = true })
 Nmap('<leader>x', '<cmd>BufferCloseAllButCurrent<CR>', { silent = true, noremap = true })
 Nmap('<C-w>', '<cmd>BufferClose<CR>', { silent = true, noremap = true })
+Nmap('<C-f>', '<cmd>:lua vim.lsp.buf.formatting()<CR>', { silent = true, noremap = true })
 
 require('navigator').setup()
 require("nvim-surround").setup({
