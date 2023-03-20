@@ -162,3 +162,19 @@ require("nvim-surround").setup({
 require('gitsigns').setup()
 
 require('alpha').setup(require('alpha.themes.startify').config)
+
+require('colorizer').setup({
+  'css',
+  'javascript',
+  'svelte',
+  'lua',
+  html = {
+    mode = 'foreground',
+  }
+})
+require("debuglog").setup({
+  log_to_console = true,
+  log_to_file = false,
+  -- The highlight group for printing the time column in console
+  time_hl_group = "Comment",
+})

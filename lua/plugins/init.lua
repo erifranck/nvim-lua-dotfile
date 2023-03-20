@@ -95,6 +95,9 @@ return require("packer").startup(function(use)
   use 'MunifTanjim/prettier.nvim'
   use "numToStr/Comment.nvim"                 -- https://github.com/numToStr/Comment.nvim
   use { "kylechui/nvim-surround", tag = "*" } -- https://github.com/kylechui/nvim-surround
+  use "norcalli/nvim-colorizer.lua"
+  -- debugger
+  use "mfussenegger/nvim-dap"
   -- use { 'ldelossa/nvim-ide' }
   use({
     "dnlhc/glance.nvim",
@@ -126,6 +129,7 @@ return require("packer").startup(function(use)
       'kyazdani42/nvim-web-devicons',
     },
   }
+  use { "smartpde/debuglog" }
   -- game development
   use 'lommix/godot.nvim'
   -- install when start vim if not installed

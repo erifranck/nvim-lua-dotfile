@@ -10,14 +10,96 @@ if not lspconfig_setup then return end
 local cmp_nvim_lsp_setup, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not cmp_nvim_lsp_setup then return end
 
+vim.api.nvim_set_hl(0, 'MyNormal', { fg = '#ffffff', bg = '#283747' })
+vim.api.nvim_set_hl(0, 'MyFloatBorder', { fg = '#283747', bg = '#F7DC6F' })
+vim.api.nvim_set_hl(0, 'Error', { fg = '#ffffff', bg = '#CD6155' })
+
+vim.api.nvim_set_hl(0, 'MyItemAbbr', { fg = '#3498DB', bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = '#F7DC6F', bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = '#CD6155', bg = 'NONE' })
+
+vim.cmd [[
+  hi! link CmpItemKind MyItemAbbr
+  hi! link CmpItemMenu MyItemAbbr
+  hi! link CmpItemAbbr MyItemAbbr
+  hi! link CmpItemAbbrMatch CmpItemAbbrMatch
+  hi! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatchFuzzy
+]]
+
+
+-- If you want insert `(` after select function or method item
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
+
+local cmp_kinds = {
+  Text = '  ',
+  Method = '  ',
+  Function = '  ',
+  Constructor = '  ',
+  Field = '  ',
+  Variable = '  ',
+  Class = '  ',
+  Interface = '  ',
+  Module = '  ',
+  Property = '  ',
+  Unit = '  ',
+  Value = '  ',
+  Enum = '  ',
+  Keyword = '  ',
+  Snippet = '  ',
+  Color = '  ',
+  File = '  ',
+  Reference = '  ',
+  Folder = '  ',
+  EnumMember = '  ',
+  Constant = '  ',
+  Struct = '  ',
+  Event = '  ',
+  Operator = '  ',
+  TypeParameter = '  ',
+}
+
 cmp.setup({
+  formatting = {
+    fields = { "kind", "abbr", "menu" },
+    format = function(entry, vim_item)
+      local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
+      -- Kind icons
+      vim_item.kind = (cmp_kinds[vim_item.kind] or '') .. vim_item.kind
+      vim_item.kind_hl_group = hl_group
+      -- Source
+      vim_item.menu = ({
+            buffer = "[Buffer]",
+            nvim_lsp = "[LSP]",
+            luasnip = "[LuaSnip]",
+            ultiSnips = "[UltiSnips]",
+            nvim_lua = "[Lua]",
+            latex_symbols = "[LaTeX]",
+          })[entry.source.name]
+      if lspkind_setup then
+        lspkind.cmp_format()
+      end
+      return vim_item
+    end
+  },
+  view = {
+    entries = "custom" -- can be "custom", "wildmenu" or "native"
+  },
   snippet = {
     expand = function(args)
       vim.fn["UltiSnips#Anon"](args.body)
     end,
   },
   window = {
-    completion = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered({
+      border = { "◎", "─", "◎", "│", "◎", "─", "◎", "│" },
+      winhighlight = "Normal:MyNormal,FloatBorder:MyFloatBorder,CursorLine:Cursor,Search:None",
+      col_offset = -3,
+      side_padding = 0,
+    }),
     documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
@@ -60,10 +142,10 @@ cmp.setup({
     }),
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'coc' },
-    { name = 'ultisnips' },
-    { name = 'treesitter' },
+    { name = 'nvim_lsp',   priority = 1, keyword_length = 3 },
+    { name = 'buffer',     priority = 2, keyword_length = 2 },
+    { name = 'ultisnips',  priority = 4 },
+    { name = 'treesitter', priority = 3 },
     { name = 'emmet_vim' },
   }, {
     { name = 'buffer' },
@@ -143,15 +225,3 @@ lspconfig['gopls'].setup {
 }
 
 lspconfig['pyright'].setup {}
-
-cmp.setup {
-  formatting = {
-    format = lspkind.cmp_format({
-      mode = "symbol_text",
-      maxwidth = 50,
-      before = function(entry, vim_item)
-        return vim_item
-      end
-    })
-  }
-}
