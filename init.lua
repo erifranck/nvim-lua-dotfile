@@ -3,12 +3,12 @@ require 'plugins'
 
 -- Coc configuration completion and snippets
 -- require "coc-setting"
+-- require 'blankline-config'
 
 require "nvim-cmp"
 -- require "ide-setting"
 require "glance-settings"
 require "aerial-settings"
--- require 'blankline-config'
 require 'starline-config'
 require 'lualine-config'
 require 'mason-settings'
