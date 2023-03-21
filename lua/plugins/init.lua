@@ -32,7 +32,8 @@ return require("packer").startup(function(use)
     end,
   }
   use "lukas-reineke/lsp-format.nvim"
-  use { 'neoclide/coc.nvim', branch = 'release' }
+  -- coc for completion
+  -- use { 'neoclide/coc.nvim', branch = 'release' }
 
   -- navigation plugins
   use { "akinsho/toggleterm.nvim", tag = '*', config = function()
