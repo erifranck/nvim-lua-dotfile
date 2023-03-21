@@ -133,6 +133,14 @@ return require("packer").startup(function(use)
     },
   }
   use { "smartpde/debuglog" }
+  use({
+    "jackMort/ChatGPT.nvim",
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+  })
   -- game development
   use 'lommix/godot.nvim'
   -- install when start vim if not installed

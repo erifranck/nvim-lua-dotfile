@@ -1,3 +1,4 @@
+require "env"
 require 'plugins'
 
 -- Coc configuration for format
@@ -16,3 +17,4 @@ require 'lsp-config'
 require 'godot-settings'
 require 'maps'
 require 'treesitter-setting'
+require 'chat-gpt-settings'
