@@ -2,7 +2,7 @@ require "env"
 require 'plugins'
 
 -- Coc configuration for format
--- require "coc-setting"
+require "coc-setting"
 
 require "nvim-cmp"
 -- require "ide-setting"
