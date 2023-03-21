@@ -11,6 +11,7 @@ require "aerial-settings"
 require 'blankline-config'
 require 'starline-config'
 require 'lualine-config'
+require 'mason-settings'
 require 'lsp-config'
 require 'godot-settings'
 require 'maps'

@@ -87,10 +87,13 @@ return require("packer").startup(function(use)
   use "ray-x/cmp-treesitter"
   use "hrsh7th/cmp-buffer"
   use "dcampos/cmp-emmet-vim"
-  use "hrsh7th/cmp-nvim-lsp"            -- https://github.com/hrsh7th/cmp-nvim-lsp
-  use "neovim/nvim-lspconfig"           -- https://github.com/neovim/nvim-lspconfig
-  use "onsails/lspkind-nvim"            -- https://github.com/onsails/lspkind-nvim
-  use "williamboman/nvim-lsp-installer" -- https://github.com/williamboman/nvim-lsp-installer
+  use "hrsh7th/cmp-nvim-lsp"  -- https://github.com/hrsh7th/cmp-nvim-lsp
+  use "neovim/nvim-lspconfig" -- https://github.com/neovim/nvim-lspconfig
+  use "onsails/lspkind-nvim"  -- https://github.com/onsails/lspkind-nvim
+  --  use "williamboman/nvim-lsp-installer" -- https://github.com/williamboman/nvim-lsp-installer deprecated
+  --  new lsp installer
+  use 'williamboman/mason.nvim'
+  use "williamboman/mason-lspconfig.nvim"
   use 'jose-elias-alvarez/null-ls.nvim'
   use 'MunifTanjim/prettier.nvim'
   use "numToStr/Comment.nvim"                 -- https://github.com/numToStr/Comment.nvim
