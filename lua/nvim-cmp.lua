@@ -72,13 +72,13 @@ cmp.setup({
       vim_item.kind_hl_group = hl_group
       -- Source
       vim_item.menu = ({
-        buffer = "[Buffer]",
-        nvim_lsp = "[LSP]",
-        luasnip = "[LuaSnip]",
-        ultiSnips = "[UltiSnips]",
-        nvim_lua = "[Lua]",
-        latex_symbols = "[LaTeX]",
-      })[entry.source.name]
+            buffer = "[Buffer]",
+            nvim_lsp = "[LSP]",
+            luasnip = "[LuaSnip]",
+            ultiSnips = "[UltiSnips]",
+            nvim_lua = "[Lua]",
+            latex_symbols = "[LaTeX]",
+          })[entry.source.name]
       if lspkind_setup then
         lspkind.cmp_format()
       end
@@ -103,12 +103,12 @@ cmp.setup({
     documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<C-y>'] = cmp.mapping.confirm({ select = true }),     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ["<C-n>"] = cmp.mapping({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<C-n>"] = cmp.mapping({
       c = function()
         if cmp.visible() then
           cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
@@ -124,7 +124,7 @@ cmp.setup({
         end
       end,
     }),
-    ["<C-p>"] = cmp.mapping({
+        ["<C-p>"] = cmp.mapping({
       c = function()
         if cmp.visible() then
           cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
@@ -142,8 +142,8 @@ cmp.setup({
     }),
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp',   priority = 1, keyword_length = 3 },
-    { name = 'buffer',     priority = 2, keyword_length = 2 },
+    { name = 'nvim_lsp',   priority = 1 },
+    { name = 'buffer',     priority = 2 },
     { name = 'ultisnips',  priority = 4 },
     { name = 'treesitter', priority = 3 },
     { name = 'emmet_vim' },
@@ -172,56 +172,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 end
 
-lspconfig['gopls'].setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    gopls = {
-      analyses = {
-        assign = true,
-        atomic = true,
-        bools = true,
-        composites = true,
-        copylocks = true,
-        deepequalerrors = true,
-        embed = true,
-        errorsas = true,
-        fieldalignment = true,
-        httpresponse = true,
-        ifaceassert = true,
-        loopclosure = true,
-        lostcancel = true,
-        nilfunc = true,
-        nilness = true,
-        nonewvars = true,
-        printf = true,
-        shadow = true,
-        shift = true,
-        simplifycompositelit = true,
-        simplifyrange = true,
-        simplifyslice = true,
-        sortslice = true,
-        stdmethods = true,
-        stringintconv = true,
-        structtag = true,
-        testinggoroutine = true,
-        tests = true,
-        timeformat = true,
-        unmarshal = true,
-        unreachable = true,
-        unsafeptr = true,
-        unusedparams = true,
-        unusedresult = true,
-        unusedvariable = true,
-        unusedwrite = true,
-        useany = true,
-      },
-      hoverKind = "FullDocumentation",
-      linkTarget = "pkg.go.dev",
-      usePlaceholders = true,
-      vulncheck = "Imports",
-    },
-  },
-}
-
-lspconfig['pyright'].setup {}
+local lsp_defaults = lspconfig.util.default_config
+local cmp_capabiliries = require('cmp_nvim_lsp').default_capabilities()
+lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, cmp_capabiliries)
