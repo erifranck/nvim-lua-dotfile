@@ -14,7 +14,15 @@ return require("packer").startup(function(use)
     event = "InsertEnter",
     config = function()
       require("copilot").setup({})
+      print('copilot running')
     end,
+  }
+  use {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua" },
+    config = function()
+      require("copilot_cmp").setup()
+    end
   }
   use {
     'nvim-treesitter/nvim-treesitter',
