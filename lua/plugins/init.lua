@@ -25,6 +25,13 @@ return require("packer").startup(function(use)
     end
   }
   use {
+    'samodostal/copilot-client.lua',
+    requires = {
+      'zbirenbaum/copilot.lua', -- requires copilot.lua and plenary.nvim
+      'nvim-lua/plenary.nvim'
+    },
+  }
+  use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
