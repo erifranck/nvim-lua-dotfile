@@ -137,7 +137,6 @@ require("twilight").setup {
   exclude = {},
 }
 Nmap('<leader>tg', "<cmd>lua _lazygit_toggle()<CR>", { silent = true, noremap = true })
-Nmap('<leader>tt', "<cmd>ToggleTerm<CR>", { silent = true, noremap = true })
 
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
