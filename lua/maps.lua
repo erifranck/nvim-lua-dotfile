@@ -23,6 +23,8 @@ vim.encoding = "utf-8"
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 vim.cmd.colorscheme "catppuccin"
+-- clipboard copy
+vim.cmd.clipboard = "unnamedplus"
 
 
 -- keymaps telescope and theme
