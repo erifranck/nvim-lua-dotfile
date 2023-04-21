@@ -13,24 +13,34 @@ return require("packer").startup(function(use)
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
-      require("copilot").setup({})
+      require("copilot").setup({
+        trace = "verbose",
+        settings = {
+          advanced = {
+            listCount = 10,     -- #completions for panel
+            inlineSuggestCount = 3, -- #completions for getCompletions
+          }
+        },
+      })
       print('copilot running')
     end,
   }
-  use {
-    "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua" },
-    config = function()
-      require("copilot_cmp").setup()
-    end
-  }
-  use {
-    'samodostal/copilot-client.lua',
-    requires = {
-      'zbirenbaum/copilot.lua', -- requires copilot.lua and plenary.nvim
-      'nvim-lua/plenary.nvim'
-    },
-  }
+  -- use {
+  --   "zbirenbaum/copilot-cmp",
+  --  after = { "copilot.lua" },
+  -- config = function()
+  --  require("copilot_cmp").setup({
+  -- })
+
+  -- end
+  --}
+  -- use {
+  -- 'samodostal/copilot-client.lua',
+  -- requires = {
+  -- 'zbirenbaum/copilot.lua', -- requires copilot.lua and plenary.nvim
+  -- 'nvim-lua/plenary.nvim'
+  -- },
+  -- }
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
