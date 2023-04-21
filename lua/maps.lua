@@ -19,12 +19,13 @@ opt.autoindent = true
 vim.o.completeopt = "menuone,noselect"
 vim.encoding = "utf-8"
 
+
 -- Theme
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 vim.cmd.colorscheme "catppuccin"
 -- clipboard copy
-vim.cmd.clipboard = "unnamedplus"
+vim.cmd [[set clipboard+=unnamedplus]]
 
 
 -- keymaps telescope and theme
