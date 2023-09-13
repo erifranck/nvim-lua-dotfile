@@ -82,9 +82,9 @@ cmp.setup({
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
-        ultiSnips = "[UltiSnips]",
+        ultiSnips = "[ultisnips]",
         treesitter = "[treesitter]",
-        copilot = "[copilot]",
+        -- copilot = "[copilot]",
         nvim_lua = "[Lua]",
         latex_symbols = "[LaTeX]",
       })[entry.source.name]
@@ -122,7 +122,7 @@ cmp.setup({
         if cmp.visible() then
           cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
         else
-          vim.api.nvim_feedkeys(t("<Down>"), "n", true)
+          vim.api.nvim_feedkeys(("<Down>"), "n", true)
         end
       end,
       i = function(fallback)
@@ -138,7 +138,7 @@ cmp.setup({
         if cmp.visible() then
           cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
         else
-          vim.api.nvim_feedkeys(t("<Up>"), "n", true)
+          vim.api.nvim_feedkeys(("<Up>"), "n", true)
         end
       end,
       i = function(fallback)

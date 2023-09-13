@@ -73,6 +73,8 @@ telescope.load_extension("ui-select")
 Nmap('<leader>ff', builtin.find_files, {})
 Nmap('<leader>gf', builtin.git_files, {})
 Nmap('<leader>fa', builtin.live_grep, {})
+Nmap('<leader>fh', builtin.help_tags, {})
+
 
 -- Toggle terminal keymaps
 
@@ -180,3 +182,4 @@ require("debuglog").setup({
   -- The highlight group for printing the time column in console
   time_hl_group = "Comment",
 })
+

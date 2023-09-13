@@ -4,43 +4,17 @@ vim.cmd [[packadd packer.nvim]]
 return require("packer").startup(function(use)
   use 'wbthomason/packer.nvim'
   use "NLKNguyen/papercolor-theme"
+  use "BurntSushi/ripgrep"
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    'nvim-telescope/telescope.nvim', tag = '0.1.x',
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
   use {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
-    config = function()
-      require("copilot").setup({
-        trace = "verbose",
-        settings = {
-          advanced = {
-            listCount = 10,     -- #completions for panel
-            inlineSuggestCount = 3, -- #completions for getCompletions
-          }
-        },
-      })
-      print('copilot running')
-    end,
   }
-  -- use {
-  --   "zbirenbaum/copilot-cmp",
-  --  after = { "copilot.lua" },
-  -- config = function()
-  --  require("copilot_cmp").setup({
-  -- })
-
-  -- end
-  --}
-  -- use {
-  -- 'samodostal/copilot-client.lua',
-  -- requires = {
-  -- 'zbirenbaum/copilot.lua', -- requires copilot.lua and plenary.nvim
-  -- 'nvim-lua/plenary.nvim'
-  -- },
-  -- }
+  use "github/copilot.vim"
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'

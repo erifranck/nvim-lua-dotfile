@@ -15,4 +15,7 @@ require 'mason-settings'
 require 'godot-settings'
 require 'maps'
 require 'treesitter-setting'
+
+-- AI tools
 require 'chat-gpt-settings'
+require 'copilot-settings'
