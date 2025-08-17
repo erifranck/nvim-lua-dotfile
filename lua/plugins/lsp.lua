@@ -28,6 +28,20 @@ return {
     end,
   },
   {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = { "mason.nvim" },
+    config = function()
+      require("mason-tool-installer").setup({
+        ensure_installed = {
+          "prettier", -- Code formatter
+          "stylua", -- Lua formatter
+        },
+        auto_update = false,
+        run_on_start = true,
+      })
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
     dependencies = { "mason-lspconfig.nvim", "cmp-nvim-lsp" },
     config = function()
@@ -44,9 +58,6 @@ return {
           capabilities = capabilities,
         })
       end
-      
-      -- Auto format on save
-      vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
     end,
   },
 }
