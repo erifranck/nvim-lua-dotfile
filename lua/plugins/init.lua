@@ -1,148 +1,95 @@
-vim.cmd [[packadd packer.nvim]]
-
--- install dependencies
-return require("packer").startup(function(use)
-  use 'wbthomason/packer.nvim'
-  use "NLKNguyen/papercolor-theme"
-  use "BurntSushi/ripgrep"
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.x',
-    requires = { { 'nvim-lua/plenary.nvim' } }
-  }
-  use {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-  }
-  use "github/copilot.vim"
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
-  use {
+-- Additional plugins not covered by other plugin files
+return {
+  "NLKNguyen/papercolor-theme",
+  "BurntSushi/ripgrep",
+  
+  
+  {
     "AckslD/nvim-neoclip.lua",
-    requires = {
-      -- you'll need at least one of these
-      -- {'nvim-telescope/telescope.nvim'},
-      -- {'ibhagwan/fzf-lua'},
-    },
+    dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
       require('neoclip').setup()
     end,
-  }
-  use "lukas-reineke/lsp-format.nvim"
-  -- coc for completion
-  -- use { 'neoclide/coc.nvim', branch = 'release' }
-
-  -- navigation plugins
-  use { "akinsho/toggleterm.nvim", tag = '*', config = function()
-    require("toggleterm").setup()
-  end }
-  use {
-    'nvim-tree/nvim-tree.lua',
-    requires = {
-      'nvim-tree/nvim-web-devicons', -- optional, for file icons
-    },
-    tag = 'nightly'                  -- optional, updated every week. (see issue #1193)
-  }
-  use {
+  },
+  
+  "lukas-reineke/lsp-format.nvim",
+  
+  {
     "folke/twilight.nvim",
     config = function()
-      require("twilight").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
+      require("twilight").setup {}
     end
-  }
-  use { "catppuccin/nvim", as = "catppuccin" }
-  use { "romgrk/barbar.nvim", wants = "nvim-tree/nvim-web-devicons" }
-  use { "lukas-reineke/indent-blankline.nvim", event = "BufRead" }
-  use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
-
-
-  use 'nvim-lualine/lualine.nvim'
-  use { 'tamton-aquib/staline.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
-
-  use {
-    'nvim-telescope/telescope-ui-select.nvim',
-  }
-  use {
-    'nvim-telescope/telescope-fzf-native.nvim', run = 'make',
-  }
-  use {
-    "nvim-telescope/telescope-file-browser.nvim",
-    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-  }
-  -- development plugins
-  use {
-    'lewis6991/gitsigns.nvim',
-  }
-  use "fatih/vim-go"                          -- https://github.com/fatih/vim-go
-  use "SirVer/ultisnips"                      -- https://github.com/sirver/UltiSnips
-  use 'nvim-lua/completion-nvim'              -- completion plugin not use at same time with cmp
-  use 'nvim-treesitter/completion-treesitter' -- completion plugin not use at same time with cmp
-  use "hrsh7th/nvim-cmp"                      -- https://github.com/hrsh7th/nvim-cmp
-  use "quangnguyen30192/cmp-nvim-ultisnips"   -- https://github.com/quangnguyen30192/cmp-nvim-ultisnips
-  use "ray-x/cmp-treesitter"
-  use "hrsh7th/cmp-buffer"
-  use "dcampos/cmp-emmet-vim"
-  use "hrsh7th/cmp-nvim-lsp"  -- https://github.com/hrsh7th/cmp-nvim-lsp
-  use "neovim/nvim-lspconfig" -- https://github.com/neovim/nvim-lspconfig
-  use "onsails/lspkind-nvim"  -- https://github.com/onsails/lspkind-nvim
-  --  use "williamboman/nvim-lsp-installer" -- https://github.com/williamboman/nvim-lsp-installer deprecated
-  --  new lsp installer
-  use 'williamboman/mason.nvim'
-  use "williamboman/mason-lspconfig.nvim"
-  use 'jose-elias-alvarez/null-ls.nvim'
-  use 'MunifTanjim/prettier.nvim'
-  use "numToStr/Comment.nvim"                 -- https://github.com/numToStr/Comment.nvim
-  use { "kylechui/nvim-surround", tag = "*" } -- https://github.com/kylechui/nvim-surround
-  use "norcalli/nvim-colorizer.lua"
-  -- debugger
-  use "mfussenegger/nvim-dap"
-  -- use { 'ldelossa/nvim-ide' }
-  use({
+  },
+  
+  { "romgrk/barbar.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+  { "lukas-reineke/indent-blankline.nvim", event = "BufRead" },
+  { 'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
+  
+  'nvim-lualine/lualine.nvim',
+  { 'tamton-aquib/staline.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' } },
+  
+  'lewis6991/gitsigns.nvim',
+  "fatih/vim-go",
+  "SirVer/ultisnips",
+  'nvim-lua/completion-nvim',
+  'nvim-treesitter/completion-treesitter',
+  "quangnguyen30192/cmp-nvim-ultisnips",
+  "ray-x/cmp-treesitter",
+  "hrsh7th/cmp-buffer",
+  "dcampos/cmp-emmet-vim",
+  "hrsh7th/cmp-nvim-lsp",
+  "onsails/lspkind-nvim",
+  'jose-elias-alvarez/null-ls.nvim',
+  'MunifTanjim/prettier.nvim',
+  "numToStr/Comment.nvim",
+  "norcalli/nvim-colorizer.lua",
+  "mfussenegger/nvim-dap",
+  
+  {
     "dnlhc/glance.nvim",
     config = function()
-      require('glance').setup({
-        -- your configuration
-      })
+      require('glance').setup({})
     end,
-  })
-  use {
+  },
+  
+  {
     'stevearc/aerial.nvim',
-    config = function() require('aerial').setup() end
-  }
-  use {
+    config = function() 
+      require('aerial').setup() 
+    end
+  },
+  
+  {
     "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup {} end
-  }
-  use {
+    config = function() 
+      require("nvim-autopairs").setup {} 
+    end
+  },
+  
+  {
     'ray-x/navigator.lua',
-    requires = {
-      { 'ray-x/guihua.lua',     run = 'cd lua/fzy && make' },
+    dependencies = {
+      { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
       { 'neovim/nvim-lspconfig' },
     },
-  }
-
-  use {
+  },
+  
+  {
     'goolord/alpha-nvim',
-    dependencies = {
-      'kyazdani42/nvim-web-devicons',
-    },
-  }
-  use { "smartpde/debuglog" }
-  use({
-    "jackMort/ChatGPT.nvim",
-    requires = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim"
-    }
-  })
-  -- game development
-  use 'lommix/godot.nvim'
-  -- install when start vim if not installed
-  vim.cmd [[PackerInstall]]
-end)
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+  },
+  
+  { "smartpde/debuglog" },
+  
+  {
+  "greggh/claude-code.nvim",
+  dependencies = {
+    "nvim-lua/plenary.nvim", -- Required for git operations
+  },
+    config = function()
+      require("claude-code").setup()
+    end
+  },
+  
+  'lommix/godot.nvim'
+}

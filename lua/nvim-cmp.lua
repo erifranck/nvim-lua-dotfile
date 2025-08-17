@@ -26,13 +26,6 @@ vim.cmd [[
   hi! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatchFuzzy
 ]]
 
-cmp.event:on("menu_opened", function()
-  vim.b.copilot_suggestion_hidden = true
-end)
-
-cmp.event:on("menu_closed", function()
-  vim.b.copilot_suggestion_hidden = false
-end)
 
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
@@ -84,7 +77,6 @@ cmp.setup({
         luasnip = "[LuaSnip]",
         ultiSnips = "[ultisnips]",
         treesitter = "[treesitter]",
-        -- copilot = "[copilot]",
         nvim_lua = "[Lua]",
         latex_symbols = "[LaTeX]",
       })[entry.source.name]
@@ -151,7 +143,6 @@ cmp.setup({
     }),
   }),
   sources = cmp.config.sources({
-    -- { name = 'copilot',    priority = 1 },
     { name = 'nvim_lsp',   priority = 1 },
     { name = 'buffer',     priority = 2 },
     { name = 'ultisnips',  priority = 4 },

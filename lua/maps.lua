@@ -30,45 +30,6 @@ vim.cmd [[set clipboard+=unnamedplus]]
 
 -- keymaps telescope and theme
 local builtin = require('telescope.builtin')
-local telescope = require("telescope")
-
-telescope.setup {
-  pickers = {
-    find_files = {
-      theme = "dropdown",
-    },
-    git_files = {
-      theme = "dropdown",
-    }
-  },
-  extensions = {
-    ["ui-select"] = {},
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case"
-    },
-    file_browser = {
-      theme = "ivy",
-      -- disables netrw and use telescope-file-browser in its place
-      hijack_netrw = true,
-      mappings = {
-        ["i"] = {
-          -- your custom insert mode mappings
-        },
-        ["n"] = {
-          -- your custom normal mode mappings
-        },
-      },
-    },
-  },
-}
-
-
-telescope.load_extension("fzf")
-telescope.load_extension("file_browser")
-telescope.load_extension("ui-select")
 
 Nmap('<leader>ff', builtin.find_files, {})
 Nmap('<leader>gf', builtin.git_files, {})
@@ -148,7 +109,10 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Navigation keymaps
-require("nvim-tree").setup()
+local nvim_tree_ok, nvim_tree = pcall(require, "nvim-tree")
+if nvim_tree_ok then
+  nvim_tree.setup()
+end
 
 Nmap('<leader>b', '<cmd>NvimTreeFindFileToggle<CR>', { silent = true, noremap = true })
 Nmap('<F3>', '<cmd>BufferNext<CR>', { silent = true, noremap = true })
@@ -157,29 +121,48 @@ Nmap('<leader>x', '<cmd>BufferCloseAllButCurrent<CR>', { silent = true, noremap 
 Nmap('<C-w>', '<cmd>BufferClose<CR>', { silent = true, noremap = true })
 Nmap('<C-f>', '<cmd>:lua vim.lsp.buf.formatting()<CR>', { silent = true, noremap = true })
 
-require('navigator').setup()
-require("nvim-surround").setup({
-  -- Configuration here, or leave empty to use defaults
-})
+local navigator_ok, navigator = pcall(require, 'navigator')
+if navigator_ok then
+  navigator.setup()
+end
 
+local surround_ok, surround = pcall(require, "nvim-surround")
+if surround_ok then
+  surround.setup({
+    -- Configuration here, or leave empty to use defaults
+  })
+end
 
-require('gitsigns').setup()
+local gitsigns_ok, gitsigns = pcall(require, 'gitsigns')
+if gitsigns_ok then
+  gitsigns.setup()
+end
 
-require('alpha').setup(require('alpha.themes.startify').config)
+local alpha_ok, alpha = pcall(require, 'alpha')
+if alpha_ok then
+  alpha.setup(require('alpha.themes.startify').config)
+end
 
-require('colorizer').setup({
-  'css',
-  'javascript',
-  'svelte',
-  'lua',
-  html = {
-    mode = 'foreground',
-  }
-})
-require("debuglog").setup({
-  log_to_console = true,
-  log_to_file = false,
-  -- The highlight group for printing the time column in console
-  time_hl_group = "Comment",
-})
+local colorizer_ok, colorizer = pcall(require, 'colorizer')
+if colorizer_ok then
+  colorizer.setup({
+    'css',
+    'javascript',
+    'svelte',
+    'lua',
+    html = {
+      mode = 'foreground',
+    }
+  })
+end
+
+local debuglog_ok, debuglog = pcall(require, "debuglog")
+if debuglog_ok then
+  debuglog.setup({
+    log_to_console = true,
+    log_to_file = false,
+    -- The highlight group for printing the time column in console
+    time_hl_group = "Comment",
+  })
+end
 
