@@ -26,11 +26,7 @@ map("n", "<leader>x", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
 map("n", "<leader>b", "<cmd>Neotree toggle<cr>", { desc = "Toggle file explorer" })
 map("n", "<leader>e", "<cmd>Neotree focus<cr>", { desc = "Focus file explorer" })
 
--- Telescope
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
-map("n", "<leader>gf", "<cmd>Telescope git_files<cr>", { desc = "Find git files" })
-map("n", "<leader>fa", "<cmd>Telescope live_grep<cr>", { desc = "Live grep" })
-map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help tags" })
+-- Telescope keymaps are defined in lua/plugins/telescope.lua
 
 -- Terminal
 map("n", "<C-,>", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })

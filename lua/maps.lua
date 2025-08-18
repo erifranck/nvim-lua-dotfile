@@ -29,12 +29,7 @@ vim.cmd [[set clipboard+=unnamedplus]]
 
 
 -- keymaps telescope and theme
-local builtin = require('telescope.builtin')
-
-Nmap('<leader>ff', builtin.find_files, {})
-Nmap('<leader>gf', builtin.git_files, {})
-Nmap('<leader>fa', builtin.live_grep, {})
-Nmap('<leader>fh', builtin.help_tags, {})
+-- Telescope keymaps are now handled in lua/plugins/telescope.lua
 
 
 -- Toggle terminal keymaps
