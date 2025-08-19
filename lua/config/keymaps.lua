@@ -21,6 +21,7 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window w
 map("n", "<F2>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 map("n", "<F3>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 map("n", "<leader>x", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
+map("n", "<C-w>", "<cmd>bdelete<cr>", { desc = "Close buffer" })
 
 -- Neo-tree
 map("n", "<leader>b", "<cmd>Neotree toggle<cr>", { desc = "Toggle file explorer" })
