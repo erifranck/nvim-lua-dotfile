@@ -33,10 +33,8 @@ map("n", "<leader>e", "<cmd>Neotree focus<cr>", { desc = "Focus file explorer" }
 map("n", "<C-,>", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
 map("n", "<leader>tg", "<cmd>lua _lazygit_toggle()<cr>", { desc = "Lazygit" })
 
--- LSP
-map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+-- LSP (gd and gr are now handled by Telescope in lua/plugins/telescope.lua)
 map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-map("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
 map("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
 map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
 map("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })

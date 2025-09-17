@@ -16,19 +16,51 @@ return {
     { "<leader>gf", function() require('telescope.builtin').git_files() end, desc = "Find git files" },
     { "<leader>fa", function() require('telescope.builtin').live_grep() end, desc = "Live grep" },
     { "<leader>fh", function() require('telescope.builtin').help_tags() end, desc = "Help tags" },
+    { "gr", function() require('telescope.builtin').lsp_references() end, desc = "LSP references" },
+    { "gd", function() require('telescope.builtin').lsp_definitions() end, desc = "LSP definitions" },
   },
   config = function()
     local telescope = require("telescope")
 
     -- Keep your exact telescope configuration
     telescope.setup {
+      defaults = {
+        preview = {
+          treesitter = true,
+        },
+        layout_config = {
+          horizontal = {
+            preview_width = 0.6,
+          },
+        },
+      },
       pickers = {
         find_files = {
           theme = "dropdown",
         },
         git_files = {
           theme = "dropdown",
-        }
+        },
+        lsp_definitions = {
+          theme = "cursor",
+          layout_config = {
+            cursor = {
+              width = 0.8,
+              height = 0.6,
+            },
+          },
+          show_line = false,
+        },
+        lsp_references = {
+          theme = "cursor",
+          layout_config = {
+            cursor = {
+              width = 0.8,
+              height = 0.6,
+            },
+          },
+          show_line = false,
+        },
       },
       extensions = {
         ["ui-select"] = {},
