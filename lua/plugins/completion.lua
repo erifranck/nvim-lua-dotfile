@@ -5,6 +5,7 @@ return {
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
+      "nvim-treesitter/nvim-treesitter",
       "ray-x/cmp-treesitter",
       "dcampos/cmp-emmet-vim",
       "quangnguyen30192/cmp-nvim-ultisnips",

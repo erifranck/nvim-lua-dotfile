@@ -2,10 +2,11 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    event = "BufRead",
+    lazy = false,
+    priority = 100,
     config = function()
-      require('nvim-treesitter.configs').setup {
-        -- Keep your exact treesitter configuration
+      local configs = require("nvim-treesitter.config")
+      configs.setup({
         ensure_installed = { "c", "lua", "vim", "query", "svelte", "typescript", "javascript", "css", "scss" },
         sync_install = false,
         auto_install = true,
@@ -21,7 +22,7 @@ return {
           end,
           additional_vim_regex_highlighting = false,
         },
-      }
+      })
     end,
   },
 }

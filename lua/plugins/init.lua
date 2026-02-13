@@ -30,15 +30,6 @@ return {
   
   'lewis6991/gitsigns.nvim',
   "fatih/vim-go",
-  "SirVer/ultisnips",
-  'nvim-lua/completion-nvim',
-  'nvim-treesitter/completion-treesitter',
-  "quangnguyen30192/cmp-nvim-ultisnips",
-  "ray-x/cmp-treesitter",
-  "hrsh7th/cmp-buffer",
-  "dcampos/cmp-emmet-vim",
-  "hrsh7th/cmp-nvim-lsp",
-  "onsails/lspkind-nvim",
   'jose-elias-alvarez/null-ls.nvim',
   'MunifTanjim/prettier.nvim',
   "numToStr/Comment.nvim",
@@ -58,14 +49,7 @@ return {
       require('aerial').setup() 
     end
   },
-  
-  {
-    "windwp/nvim-autopairs",
-    config = function() 
-      require("nvim-autopairs").setup {} 
-    end
-  },
-  
+
   {
     'ray-x/navigator.lua',
     dependencies = {

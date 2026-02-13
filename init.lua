@@ -5,5 +5,3 @@ require("config.lazy")
 require("config.options")
 require("config.keymaps")
 
--- Load environment variables
-require("env")

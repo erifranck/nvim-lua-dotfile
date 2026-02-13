@@ -26,7 +26,7 @@ return {
     telescope.setup {
       defaults = {
         preview = {
-          treesitter = true,
+          treesitter = false,
         },
         layout_config = {
           horizontal = {
