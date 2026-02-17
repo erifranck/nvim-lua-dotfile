@@ -45,18 +45,18 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = { "mason-lspconfig.nvim", "cmp-nvim-lsp" },
     config = function()
-      local lspconfig = require("lspconfig")
       local cmp_nvim_lsp = require("cmp_nvim_lsp")
-      
+
       local capabilities = cmp_nvim_lsp.default_capabilities()
-      
-      -- Setup LSP servers
+
+      -- Setup LSP servers using native vim.lsp.config API (Neovim 0.11+)
       local servers = { "html", "svelte", "ts_ls" }
-      
+
       for _, server in ipairs(servers) do
-        lspconfig[server].setup({
+        vim.lsp.config(server, {
           capabilities = capabilities,
         })
+        vim.lsp.enable(server)
       end
     end,
   },

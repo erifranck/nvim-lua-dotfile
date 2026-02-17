@@ -7,9 +7,9 @@ return {
       "hrsh7th/cmp-buffer",
       "ray-x/cmp-treesitter",
       "dcampos/cmp-emmet-vim",
-      "quangnguyen30192/cmp-nvim-ultisnips",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
       "onsails/lspkind-nvim",
-      "SirVer/ultisnips",
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
@@ -80,7 +80,6 @@ return {
               buffer = "[Buffer]",
               nvim_lsp = "[LSP]",
               luasnip = "[LuaSnip]",
-              ultiSnips = "[ultisnips]",
               treesitter = "[treesitter]",
               nvim_lua = "[Lua]",
               latex_symbols = "[LaTeX]",
@@ -94,7 +93,7 @@ return {
         },
         snippet = {
           expand = function(args)
-            vim.fn["UltiSnips#Anon"](args.body)
+            require('luasnip').lsp_expand(args.body)
           end,
         },
         window = {
@@ -148,7 +147,7 @@ return {
         sources = cmp.config.sources({
           { name = 'nvim_lsp',   priority = 1 },
           { name = 'buffer',     priority = 2 },
-          { name = 'ultisnips',  priority = 4 },
+          { name = 'luasnip',    priority = 4 },
           { name = 'treesitter', priority = 5 },
           { name = 'emmet_vim' },
         }, {

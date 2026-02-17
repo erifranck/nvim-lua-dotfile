@@ -5,5 +5,5 @@ require("config.lazy")
 require("config.options")
 require("config.keymaps")
 
--- Load environment variables
-require("env")
+-- Load environment variables (optional)
+pcall(require, "env")

@@ -32,7 +32,7 @@ This is a Neovim configuration built with Lua, using Lazy.nvim as the plugin man
 ### Plugin Architecture
 
 The configuration uses these core plugin categories:
-- **Completion**: nvim-cmp with LSP, buffer, treesitter, and ultisnips sources
+- **Completion**: nvim-cmp with LSP, buffer, treesitter, and LuaSnip sources
 - **LSP**: Mason for server management, nvim-lspconfig for server setup
 - **Navigation**: Telescope for fuzzy finding, Neo-tree for file explorer
 - **UI**: Lualine for statusline, Catppuccin theme, Bufferline for tabs

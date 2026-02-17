@@ -30,10 +30,8 @@ return {
   
   'lewis6991/gitsigns.nvim',
   "fatih/vim-go",
-  "SirVer/ultisnips",
   'nvim-lua/completion-nvim',
   'nvim-treesitter/completion-treesitter',
-  "quangnguyen30192/cmp-nvim-ultisnips",
   "ray-x/cmp-treesitter",
   "hrsh7th/cmp-buffer",
   "dcampos/cmp-emmet-vim",
